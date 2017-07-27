@@ -1,9 +1,9 @@
 # Shipment Tracking Library For Yanwen Express
 
-[![Build Status](https://img.shields.io/travis/slince/shipment-tracking-yanwenexpress/master.svg?style=flat-square)](https://travis-ci.org/slince/shipment-tracking-yanwenexpress)
-[![Coverage Status](https://img.shields.io/codecov/c/github/slince/shipment-tracking-yanwenexpress.svg?style=flat-square)](https://codecov.io/github/slince/shipment-tracking-yanwenexpress)
-[![Latest Stable Version](https://img.shields.io/packagist/v/slince/shipment-tracking-yanwenexpress.svg?style=flat-square&label=stable)](https://packagist.org/packages/slince/shipment-tracking-yanwenexpress)
-[![Scrutinizer](https://img.shields.io/scrutinizer/g/slince/shipment-tracking-yanwenexpress.svg?style=flat-square)](https://scrutinizer-ci.com/g/slince/shipment-tracking-yanwenexpress/?branch=master)
+[![Build Status](https://img.shields.io/travis/slince/shipment-tracking-yanwen-express/master.svg?style=flat-square)](https://travis-ci.org/slince/shipment-tracking-yanwen-express)
+[![Coverage Status](https://img.shields.io/codecov/c/github/slince/shipment-tracking-yanwen-express.svg?style=flat-square)](https://codecov.io/github/slince/shipment-tracking-yanwen-express)
+[![Latest Stable Version](https://img.shields.io/packagist/v/slince/shipment-tracking-yanwen-express.svg?style=flat-square&label=stable)](https://packagist.org/packages/slince/shipment-tracking-yanwen-express)
+[![Scrutinizer](https://img.shields.io/scrutinizer/g/slince/shipment-tracking-yanwen-express.svg?style=flat-square)](https://scrutinizer-ci.com/g/slince/shipment-tracking-yanwen-express/?branch=master)
 
 A flexible and shipment tracking library for Yanwen Express
 
@@ -12,7 +12,7 @@ A flexible and shipment tracking library for Yanwen Express
 Install via composer
 
 ```bash
-$ composer require slince/shipment-tracking-yanwenexpress
+$ composer require slince/shipment-tracking-yanwen-express
 ```
 ## Basic Usage
 
