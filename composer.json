@@ -1,7 +1,7 @@
 {
-    "name": "slince/shipment-tracking-dhlecommerce",
-    "keywords": ["shipment", "tracking", "tracker", "parcel", "DHL", "DHL eCommerce"],
-    "description": "A flexible and shipment tracking library for DHL eCommerce.",
+    "name": "slince/shipment-tracking-yanwen-express",
+    "keywords": ["shipment",  "燕文", "燕文物流", "yanwen express", "tracking", "tracker", "parcel"],
+    "description": "A flexible and shipment tracking library for Yanwen Express.",
     "license": "MIT",
     "authors": [
         {
@@ -18,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Slince\\ShipmentTracking\\DHLECommerce\\": "src/"
+            "Slince\\ShipmentTracking\\YanWenExpress\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Slince\\ShipmentTracking\\DHLECommerce\\Tests\\": "tests/"
+            "Slince\\ShipmentTracking\\YanWenExpress\\Tests\\": "tests/"
         }
     }
 }

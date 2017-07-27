@@ -1,13 +1,18 @@
 <?php
-namespace Slince\ShipmentTracking\YanWen;
+/**
+ * Slince shipment tracker library
+ * @author Tao <taosikai@yeah.net>
+ */
+namespace Slince\ShipmentTracking\YanWenExpress;
 
 use GuzzleHttp\Client as HttpClient;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Exception\GuzzleException;
+use Psr\Http\Message\RequestInterface;
 use Slince\ShipmentTracking\Exception\TrackException;
 use Slince\ShipmentTracking\HttpAwareTracker;
 use Slince\ShipmentTracking\Shipment;
 use Slince\ShipmentTracking\ShipmentEvent;
-use Slince\ShipmentTracking\Exception\RuntimeException;
-use GuzzleHttp\Exception\GuzzleException;
 
 class YanWenTracker extends HttpAwareTracker
 {
@@ -25,11 +30,6 @@ class YanWenTracker extends HttpAwareTracker
      * @var string
      */
     protected $culture;
-
-    protected $parameters = [
-        'key' => 'none',
-        'culture' => 'en',
-    ];
 
     public function __construct($key = 'none', $culture =  'en', HttpClient $httpClient = null)
     {
@@ -79,22 +79,51 @@ class YanWenTracker extends HttpAwareTracker
      */
     public function track($trackingNumber)
     {
-        $parameters = $this->parameters;
-        $parameters['tracking_number'] = $trackingNumber;
+        $parameters  = [
+            'key' => $this->key,
+            'culture' => $this->culture,
+            'tracking_number' => $trackingNumber
+        ];
+        $request = new Request('GET', static::TRACKING_ENDPOINT);
+        $json = $this->sendRequest($request, [
+            'query' => $parameters
+        ]);
+        if ($json['code'] != 0) {
+            throw new TrackException(sprintf('Bad response with code "%d"', $json['code']));
+        }
+        return static::buildShipment($json);
+    }
+
+    /**
+     * @return HttpClient
+     */
+    protected function getHttpClient()
+    {
+        if (!is_null($this->httpClient)) {
+            return $this->httpClient;
+        }
+        return $this->httpClient = new HttpClient();
+    }
+
+    /**
+     * @param RequestInterface $request
+     * @param array $options
+     * @return array
+     */
+    protected function sendRequest(RequestInterface $request, array $options = [])
+    {
         try {
-            $response = $this->httpClient->get(static::TRACKING_ENDPOINT, [
-                'query' => $parameters
-            ]);
-            $json = \GuzzleHttp\json_decode((string)$response->getBody(), true);
-            if ($json['code'] != 0) {
-                throw new RuntimeException(sprintf('Bad response with code "%d"', $json['code']));
-            }
-            return static::buildShipment($json);
+            $response = $this->getHttpClient()->send($request, $options);
+            return \GuzzleHttp\json_decode((string)$response->getBody(), true);
         } catch (GuzzleException $exception) {
             throw new TrackException($exception->getMessage());
         }
     }
 
+    /**
+     * @param array $json
+     * @return Shipment
+     */
     protected static function buildShipment($json)
     {
         $shippingItems = array_merge($json['origin_items'], $json['destin_items']);
