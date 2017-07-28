@@ -5,7 +5,7 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/slince/shipment-tracking-yanwen-express.svg?style=flat-square&label=stable)](https://packagist.org/packages/slince/shipment-tracking-yanwen-express)
 [![Scrutinizer](https://img.shields.io/scrutinizer/g/slince/shipment-tracking-yanwen-express.svg?style=flat-square)](https://scrutinizer-ci.com/g/slince/shipment-tracking-yanwen-express/?branch=master)
 
-A flexible and shipment tracking library for Yanwen Express
+A flexible and shipment tracking library for Yanwen Express(燕文物流).
 
 ## Installation
 
