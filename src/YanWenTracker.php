@@ -96,6 +96,7 @@ class YanWenTracker extends HttpAwareTracker
 
     /**
      * @return HttpClient
+     * @codeCoverageIgnore
      */
     protected function getHttpClient()
     {
@@ -109,6 +110,7 @@ class YanWenTracker extends HttpAwareTracker
      * @param RequestInterface $request
      * @param array $options
      * @return array
+     * @codeCoverageIgnore
      */
     protected function sendRequest(RequestInterface $request, array $options = [])
     {
