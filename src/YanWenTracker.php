@@ -128,6 +128,9 @@ class YanWenTracker extends HttpAwareTracker
      */
     protected static function buildShipment($json)
     {
+        if (is_null($json['origin_items']) && is_null($json['destin_items'])) {
+            throw new TrackException(sprintf('Bad response'));
+        }
         $shippingItems = array_merge($json['origin_items'], $json['destin_items']);
         $events = array_map(function($item) {
             return ShipmentEvent::fromArray([

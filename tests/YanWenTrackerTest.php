@@ -47,4 +47,11 @@ class YanWenTrackerTest extends TestCase
         $this->expectException(TrackException::class);
         $tracker->track('foo');
     }
+
+    public function testBadResponseTrack()
+    {
+        $tracker = $this->getTrackerMock('error_tracking_number_tracking');
+        $this->expectException(TrackException::class);
+        $tracker->track('foo');
+    }
 }
