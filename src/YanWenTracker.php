@@ -11,7 +11,6 @@ use GuzzleHttp\Exception\GuzzleException;
 use Psr\Http\Message\RequestInterface;
 use Slince\ShipmentTracking\Exception\TrackException;
 use Slince\ShipmentTracking\HttpAwareTracker;
-use Slince\ShipmentTracking\Shipment;
 use Slince\ShipmentTracking\ShipmentEvent;
 
 class YanWenTracker extends HttpAwareTracker
@@ -141,6 +140,27 @@ class YanWenTracker extends HttpAwareTracker
             ]);
         }, $shippingItems);
         $shipment = new Shipment($events);
+
+        //build origin events
+        $shipment->setOriginEvents(array_map(function($item) {
+            return ShipmentEvent::fromArray([
+                'location' => $item['location'],
+                'description' => $item['message'],
+                'date' => $item['timestamp'],
+                'status' => null
+            ]);
+        }, (array)$json['origin_items']));
+
+        //build destination events
+        $shipment->setDestinationEvents(array_map(function($item) {
+            return ShipmentEvent::fromArray([
+                'location' => $item['location'],
+                'description' => $item['message'],
+                'date' => $item['timestamp'],
+                'status' => null
+            ]);
+        }, (array)$json['destin_items']));
+
         $shipment->setIsDelivered($json['state'] == 40)
             ->setOrigin($json['origin_country'])
             ->setDestination($json['destin_country'])

@@ -39,6 +39,8 @@ class YanWenTrackerTest extends TestCase
         $shipment = $tracker->track('foo');
         $this->assertTrue($shipment->isDelivered());
         $this->assertCount(22, $shipment->getEvents());
+        $this->assertCount(10, $shipment->getOriginEvents());
+        $this->assertCount(12, $shipment->getDestinationEvents());
     }
 
     public function testErrorTrack()
